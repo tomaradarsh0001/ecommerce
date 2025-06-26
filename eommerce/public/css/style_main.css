@@ -1,0 +1,25 @@
+@media (min-width: 768px) {
+    .offset-md-0 {
+        margin-left: 360px !important;
+    }
+}
+
+@keyframes flashGradient {
+
+    0%,
+    100% {
+        background-color: #f87171;
+    }
+
+    50% {
+        background-color: #facc15;
+    }
+}
+
+.animate-flash-gradient {
+    animation: flashGradient 1.5s infinite;
+}
+
+.product-item {
+    padding: 0px !important;
+}
