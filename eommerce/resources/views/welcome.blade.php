@@ -300,7 +300,7 @@
           <!-- <div class="col-lg-4">
             <ul class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
               <li class="nav-item active">
-                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html" class="nav-link">Dashboard</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle pe-3" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
