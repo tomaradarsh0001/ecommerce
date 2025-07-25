@@ -7,39 +7,42 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
-    <link
-      rel="icon"
-      href="admin/assets/img/kaiadmin/favicon.ico"
-      type="image/x-icon"
-    />
+  <link
+    rel="icon"
+    href="{{ asset('admin/assets/img/kaiadmin/favicon.ico') }}"
+    type="image/x-icon"
+/>
 
-    <!-- Fonts and icons -->
-    <script src="admin/assets/js/plugin/webfont/webfont.min.js"></script>
-    <script>
-      WebFont.load({
+<!-- Fonts and icons -->
+<script src="{{ asset('admin/assets/js/plugin/webfont/webfont.min.js') }}"></script>
+<script>
+    WebFont.load({
         google: { families: ["Public Sans:300,400,500,600,700"] },
         custom: {
-          families: [
-            "Font Awesome 5 Solid",
-            "Font Awesome 5 Regular",
-            "Font Awesome 5 Brands",
-            "simple-line-icons",
-          ],
-          urls: ["admin/assets/css/fonts.min.css"],
+            families: [
+                "Font Awesome 5 Solid",
+                "Font Awesome 5 Regular",
+                "Font Awesome 5 Brands",
+                "simple-line-icons",
+            ],
+            urls: ["{{ asset('admin/assets/css/fonts.min.css') }}"],
         },
         active: function () {
-          sessionStorage.fonts = true;
+            sessionStorage.fonts = true;
         },
-      });
-    </script>
+    });
+</script>
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="admin/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="admin/assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="admin/assets/css/kaiadmin.min.css" />
+<!-- CSS Files -->
+<link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('admin/assets/css/plugins.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('admin/assets/css/kaiadmin.min.css') }}" />
 
+@if(app()->environment('local'))
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="admin/assets/css/demo.css" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/demo.css') }}" />
+@endif
+
   </head>
   <body>
     <div class="wrapper">
@@ -334,11 +337,11 @@
             <div class="logo-header" data-background-color="dark">
               <a href="index.html" class="logo">
                 <img
-                  src="admin/assets/img/kaiadmin/logo_light.svg"
-                  alt="navbar brand"
-                  class="navbar-brand"
-                  height="20"
-                />
+                src="{{ asset('admin/assets/img/kaiadmin/logo_light.svg') }}"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="20"
+            />
               </a>
               <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -431,10 +434,10 @@
                         <div class="notif-center">
                           <a href="#">
                             <div class="notif-img">
-                              <img
-                                src="admin/assets/img/jm_denis.jpg"
-                                alt="Img Profile"
-                              />
+                             <img 
+                                src="{{ asset('admin/assets/img/jm_denis.jpg') }}" 
+                                alt="Img Profile" 
+                            />
                             </div>
                             <div class="notif-content">
                               <span class="subject">Jimmy Denis</span>
@@ -445,7 +448,7 @@
                           <a href="#">
                             <div class="notif-img">
                               <img
-                                src="admin/assets/img/chadengle.jpg"
+                                src="{{ asset('admin/assets/img/chadengle.jpg') }}"
                                 alt="Img Profile"
                               />
                             </div>
@@ -458,7 +461,7 @@
                           <a href="#">
                             <div class="notif-img">
                               <img
-                                src="admin/assets/img/mlane.jpg"
+                                src="{{ asset('admin/assets/img/mlane.jpg') }}"
                                 alt="Img Profile"
                               />
                             </div>
@@ -473,7 +476,7 @@
                           <a href="#">
                             <div class="notif-img">
                               <img
-                                src="admin/assets/img/talha.jpg"
+                                src="{{ asset('admin/assets/img/talha.jpg') }}"
                                 alt="Img Profile"
                               />
                             </div>
@@ -541,7 +544,7 @@
                           <a href="#">
                             <div class="notif-img">
                               <img
-                                src="admin/assets/img/profile2.jpg"
+                                src="{{ asset('admin/assets/img/profile2.jpg') }}"
                                 alt="Img Profile"
                               />
                             </div>
@@ -659,7 +662,7 @@
                   >
                     <div class="avatar-sm">
                       <img
-                        src="admin/assets/img/profile.jpg"
+                        src="{{ asset('admin/assets/img/profile.jpg') }}"
                         alt="..."
                         class="avatar-img rounded-circle"
                       />
@@ -675,7 +678,7 @@
                         <div class="user-box">
                           <div class="avatar-lg">
                             <img
-                              src="admin/assets/img/profile.jpg"
+                              src="{{ asset('admin/assets/img/profile.jpg') }}"
                               alt="image profile"
                               class="avatar-img rounded"
                             />
@@ -942,41 +945,39 @@
       <!-- End Custom template -->
     </div>
     <!--   Core JS Files   -->
-    <script src="admin/assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="admin/assets/js/core/popper.min.js"></script>
-    <script src="admin/assets/js/core/bootstrap.min.js"></script>
+  <script src="{{ asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/core/bootstrap.min.js') }}"></script>
 
-    <!-- jQuery Scrollbar -->
-    <script src="admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- jQuery Scrollbar -->
+<script src="{{ asset('admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
-    <!-- Chart JS -->
-    <script src="admin/assets/js/plugin/chart.js/chart.min.js"></script>
+<!-- Chart JS -->
+<script src="{{ asset('admin/assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
-    <!-- jQuery Sparkline -->
-    <script src="admin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+<!-- jQuery Sparkline -->
+<script src="{{ asset('admin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
-    <!-- Chart Circle -->
-    <script src="admin/assets/js/plugin/chart-circle/circles.min.js"></script>
+<!-- Chart Circle -->
+<script src="{{ asset('admin/assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
-    <!-- Datatables -->
-    <script src="admin/assets/js/plugin/datatables/datatables.min.js"></script>
+<!-- Datatables -->
+<script src="{{ asset('admin/assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
-    <!-- Bootstrap Notify -->
-    <script src="admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+<!-- Bootstrap Notify -->
+<script src="{{ asset('admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
-    <!-- jQuery Vector Maps -->
-    <script src="admin/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-    <script src="admin/assets/js/plugin/jsvectormap/world.js"></script>
+<!-- jQuery Vector Maps -->
+<script src="{{ asset('admin/assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/plugin/jsvectormap/world.js') }}"></script>
 
-    <!-- Sweet Alert -->
-    <script src="admin/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+<!-- Sweet Alert -->
+<script src="{{ asset('admin/assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
-    <!-- Kaiadmin JS -->
-    <script src="admin/assets/js/kaiadmin.min.js"></script>
+<script src="{{ asset('admin/assets/js/kaiadmin.min.js') }}"></script>
 
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="admin/assets/js/setting-demo.js"></script>
-    <script src="admin/assets/js/demo.js"></script>
+<script src="{{ asset('admin/assets/js/setting-demo.js') }}"></script>
+<script src="{{ asset('admin/assets/js/demo.js') }}"></script>
     <script>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
