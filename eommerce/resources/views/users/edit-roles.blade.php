@@ -4,15 +4,15 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card bg-white border-0 shadow-sm">
+            <div class="card bg-white border-0 shadow-sm mt-4">
                 <div class="card-header bg-white border-0 py-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">
                             <i class="fas fa-user-shield me-2"></i>Edit Roles for: {{ $user->name }}
                         </h4>
-                        <span class="badge bg-{{ $user->is_active ? 'success' : 'danger' }}">
+                        <!-- <span class="badge bg-{{ $user->is_active ? 'success' : 'danger' }}">
                             {{ $user->is_active ? 'Active' : 'Inactive' }}
-                        </span>
+                        </span> -->
                     </div>
                 </div>
                 <div class="card-body">

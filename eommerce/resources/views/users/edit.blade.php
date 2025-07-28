@@ -4,7 +4,7 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card bg-white border-0 shadow-sm">
+            <div class="card bg-white border-0 shadow-sm mt-4">
                 <div class="card-header bg-white border-0 py-3">
                     <h4 class="mb-0"><i class="fas fa-user-edit me-2"></i>Edit User: {{ $user->name }}</h4>
                 </div>
@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <label class="col-md-4 col-form-label text-md-end">Roles</label>
                             <div class="col-md-6">
                                 @foreach($roles as $role)
@@ -75,7 +75,7 @@
                                 </div>
                                 @endforeach
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

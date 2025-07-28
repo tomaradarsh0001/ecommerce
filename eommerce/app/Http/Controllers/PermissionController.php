@@ -37,6 +37,16 @@ class PermissionController extends Controller
     {
         return view('permissions.edit', compact('permission'));
     }
+   public function toggleStatus(Request $request, Permission $permission)
+{
+    if ($permission->is_active && $permission->roles()->count() > 0) {
+        return back()->with('error', 'Permission is already assigned to a role and cannot be deactivated.');
+    }
+    $permission->is_active = !$permission->is_active;
+    $permission->save();
+
+    return back()->with('success', 'Permission status updated successfully.');
+}
 
 
     public function update(Request $request, Permission $permission)
@@ -49,11 +59,6 @@ class PermissionController extends Controller
 
         return redirect()->route('permissions.index')
             ->with('success', 'Permission updated successfully.');
-    }
-    public function toggleStatus(Permission $permission)
-    {
-        $permission->update(['is_active' => !$permission->is_active]);
-        return back()->with('success', 'Permission status updated');
     }
 
 }

@@ -41,12 +41,26 @@ class RoleController extends Controller
         return redirect()->route('roles.index')->with('success', 'Role created.');
     }
 
-    public function toggleStatus(Role $role)
-    {
-        $role->update(['is_active' => !$role->is_active]);
-        
-        return back()->with('success', 'Role status updated successfully');
+    public function toggleStatus(Request $request, Role $role)
+{
+    // Trying to deactivate the role
+    if ($role->is_active && $role->users()->count() > 0) {
+        return back()->with('error', 'This role is assigned to one or more users and cannot be deactivated.');
     }
+
+    // Safe to toggle status
+    $role->is_active = !$role->is_active;
+    $role->save();
+
+    return back()->with('success', 'Role status updated successfully.');
+}
+
+    // public function toggleStatus(Role $role)
+    // {
+    //     $role->update(['is_active' => !$role->is_active]);
+        
+    //     return back()->with('success', 'Role status updated successfully');
+    // }
     public function checkExists(Request $request)
     {
         $validated = $request->validate([
@@ -98,11 +112,7 @@ class RoleController extends Controller
         return redirect()->route('roles.index')
             ->with('success', 'Permissions updated successfully');
     }
-    // public function assignPermissions(Request $request, Role $role)
-    // {
-    //     $role->permissions()->sync($request->permissions);
-    //     return back()->with('success', 'Permissions updated successfully.');
-    // }
+    
 }
 
 

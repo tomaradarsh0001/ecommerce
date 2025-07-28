@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+        .form-select{
+        font-size: 1.3rem !important;
+    }
+</style>
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -17,21 +22,42 @@
                     </div>
                 </div>
             </div>
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
 
             <!-- Permissions List Card -->
             <div class="card bg-white border-0 shadow-sm">
                 <div class="card-body p-0">
                     @forelse($permissions as $permission)
                     <div class="p-4 border-bottom d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="mb-1 text-dark d-flex align-items-center">
-                                {{ $permission->name }}
-                                <span class="badge ms-2 bg-{{ $permission->is_active ? 'success' : 'danger' }}">
-                                    {{ $permission->is_active ? 'Active' : 'Inactive' }}
-                                </span>
-                            </h5>
-                            <small class="text-muted">Created: {{ $permission->created_at->format('M d, Y') }}</small>
-                        </div>
+                       <div>
+                        <h5 class="mb-1 text-dark d-flex align-items-center">
+                            <i class="fas fa-key me-2"></i> {{-- Icon before permission name --}}
+                            {{ $permission->name }}
+                            <span class="badge ms-2 bg-{{ $permission->is_active ? 'success' : 'danger' }}">
+                                <i class="fas fa-check-circle me-1" style="display: {{ $permission->is_active ? 'inline' : 'none' }}"></i>
+                                <i class="fas fa-times-circle me-1" style="display: {{ $permission->is_active ? 'none' : 'inline' }}"></i>
+                                {{ $permission->is_active ? 'Active' : 'Inactive' }}
+                            </span>
+                        </h5>
+                        <small class="text-muted">
+                            <i class="far fa-calendar-alt me-1"></i> {{-- Icon before created date --}}
+                            Created: {{ $permission->created_at->format('M d, Y') }}
+                        </small>
+                    </div>
+
                         
                         <div class="d-flex align-items-center">
                             <!-- Status Toggle Switch -->

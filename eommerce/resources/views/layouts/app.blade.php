@@ -76,27 +76,26 @@
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
-              <li class="nav-item active">
-                <a
-                  data-bs-toggle="collapse"
-                  href="#dashboard"
-                  class="collapsed"
-                  aria-expanded="false"
-                >
+              <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+              <a data-bs-toggle="collapse" href="#dashboard" 
+                class="{{ request()->routeIs('dashboard') ? '' : 'collapsed' }}" 
+                aria-expanded="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}">
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>
                   <span class="caret"></span>
-                </a>
-                <div class="collapse" id="dashboard">
+              </a>
+              
+              <div class="collapse {{ request()->routeIs('dashboard') ? 'show' : '' }}" id="dashboard">
                   <ul class="nav nav-collapse">
-                    <li>
-                      <a href="../demo1/index.html">
-                        <span class="sub-item">Dashboard 1</span>
-                      </a>
-                    </li>
+                      <li>
+                          <a href="{{ route('dashboard') }}">
+                              <span class="sub-item"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</span>
+                          </a>
+                      </li>
                   </ul>
-                </div>
-              </li>
+              </div>
+          </li>
+
               <li class="nav-section">
                 <span class="sidebar-mini-icon">
                   <i class="fa fa-ellipsis-h"></i>
@@ -105,59 +104,30 @@
               </li>
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
-                  <i class="fas fa-layer-group"></i>
-                  <p>Base</p>
+                  <i class="fas fa-user"></i>
+                  <p>RBAC</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="base">
-                  <ul class="nav nav-collapse">
+                <ul class="nav nav-collapse">
                     <li>
-                      <a href="components/avatars.html">
-                        <span class="sub-item">Avatars</span>
-                      </a>
+                        <a href="{{ route('users.index') }}">
+                            <span class="sub-item"><i class="fas fa-users me-1"></i> Users</span>
+                        </a>
                     </li>
                     <li>
-                      <a href="components/buttons.html">
-                        <span class="sub-item">Buttons</span>
-                      </a>
+                        <a href="{{ route('roles.index') }}">
+                            <span class="sub-item"><i class="fas fa-user-shield me-1"></i> Roles</span>
+                        </a>
                     </li>
                     <li>
-                      <a href="components/gridsystem.html">
-                        <span class="sub-item">Grid System</span>
-                      </a>
+                        <a href="{{ route('permissions.index') }}">
+                            <span class="sub-item"><i class="fas fa-key me-1"></i> Permissions</span>
+                        </a>
                     </li>
-                    <li>
-                      <a href="components/panels.html">
-                        <span class="sub-item">Panels</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="components/notifications.html">
-                        <span class="sub-item">Notifications</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="components/sweetalert.html">
-                        <span class="sub-item">Sweet Alert</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="components/font-awesome-icons.html">
-                        <span class="sub-item">Font Awesome Icons</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="components/simple-line-icons.html">
-                        <span class="sub-item">Simple Line Icons</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="components/typography.html">
-                        <span class="sub-item">Typography</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                </ul>
+            </div>
+
               </li>
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarLayouts">

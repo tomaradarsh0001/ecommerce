@@ -21,9 +21,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
-
-    Route::get('/users/assign-role', [UserRoleController::class, 'index'])->name('users.assign-role');
-    Route::post('/users/assign-role', [UserRoleController::class, 'assign'])->name('users.assign-role.store');
     Route::resource('users', UserController::class)->except(['show']);
     Route::patch('/users/{user}/toggle-status', [UserController::class, 'toggleStatus'])
         ->name('users.toggle-status');
@@ -34,8 +31,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/roles/{role}/permissions', [RoleController::class, 'assignPermissions'])->name('roles.assign-permissions');
     Route::post('/permissions/check-exists', [PermissionController::class, 'checkExists'])
     ->name('permissions.check-exists');
-    Route::patch('permissions/{permission}/toggle-status', [PermissionController::class, 'toggleStatus'])
-    ->name('permissions.toggle-status');
+    Route::patch('/permissions/{permission}/toggle-status', [PermissionController::class, 'toggleStatus'])->name('permissions.toggle-status');
     Route::patch('roles/{role}/toggle-status', [RoleController::class, 'toggleStatus'])
     ->name('roles.toggle-status');
     Route::post('/roles/check-exists', [RoleController::class, 'checkExists'])

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -18,10 +19,10 @@ class UserController extends Controller
                     ->orWhere('email', 'like', '%'.request('search').'%');
             })
             ->when(request('status') === 'active', function($query) {
-                $query->where('is_active', true);
+                $query->where('status', true);
             })
             ->when(request('status') === 'inactive', function($query) {
-                $query->where('is_active', false);
+                $query->where('status', false);
             })
             ->orderBy('name')
             ->paginate(10);
@@ -71,9 +72,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'nullable|confirmed|'.Rules\Password::defaults(),
-            'roles' => 'nullable|array',
-            'roles.*' => 'exists:roles,id',
+           'password' => ['required', Password::min(8)],
+            // 'roles' => 'nullable|array',
+            // 'roles.*' => 'exists:roles,id',
         ]);
 
         $user->update([
@@ -108,20 +109,17 @@ class UserController extends Controller
             ->with('success', 'User deleted successfully.');
     }
 
-    public function toggleStatus(User $user)
-    {
-        // Prevent deactivating yourself
-        if ($user->id === auth()->id() && $user->is_active) {
-            return redirect()->back()
-                ->with('error', 'You cannot deactivate your own account.');
-        }
+    public function toggleStatus(Request $request, User $user)
+{
+    // Ensure only 'active' or 'inactive' is saved
+    $validatedStatus = in_array($request->status, ['active', 'inactive']) ? $request->status : 'inactive';
+    
+    $user->status = $validatedStatus;
+    $user->save();
 
-        $user->update(['is_active' => !$user->is_active]);
-        
-        $status = $user->is_active ? 'activated' : 'deactivated';
-        return redirect()->back()
-            ->with('success', "User {$status} successfully.");
-    }
+    return back()->with('success', 'User status updated successfully.');
+}
+
 
     public function editRoles(User $user)
     {

@@ -19,7 +19,19 @@
                     </a>
                 </div>
             </div>
+             @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
 
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
             <!-- Filters -->
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
@@ -60,30 +72,44 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <h5 class="mb-2">{{ $role->name }}</h5>
+                                    <h5 class="mb-2">
+                                        <i class="fas fa-user-shield me-1"></i>
+                                        {{ $role->name }}
+                                    </h5>
                                     <span class="badge bg-{{ $role->is_active ? 'success' : 'danger' }} ms-2">
                                         {{ $role->is_active ? 'Active' : 'Inactive' }}
                                     </span>
                                 </div>
+
                                 @if($role->permissions->count())
                                     <div class="d-flex flex-wrap gap-2 mt-2">
                                         @foreach($role->permissions as $permission)
-                                        <span class="badge bg-light border text-dark">{{ $permission->name }}</span>
+                                            <span class="badge bg-light border text-dark">
+                                                <i class="fas fa-key me-1"></i> {{-- Icon before permission --}}
+                                                {{ $permission->name }}
+                                            </span>
                                         @endforeach
                                     </div>
                                 @else
                                     <span class="text-muted small">No permissions assigned</span>
                                 @endif
                             </div>
+
                             <div class="d-flex align-items-start flex-column">
                                 <form method="POST" action="{{ route('roles.toggle-status', $role->id) }}" class="mb-2">
                                     @csrf
                                     @method('PATCH')
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch"
+                                        
+                                        <!-- <input class="form-check-input" type="checkbox" role="switch"
                                             id="statusToggle{{ $role->id }}"
                                             {{ $role->is_active ? 'checked' : '' }}
-                                            onchange="this.form.submit()">
+                                            onchange="this.form.submit()"> -->
+                                            <input class="form-check-input" type="checkbox" role="switch"
+                                                id="statusToggle{{ $role->id }}"
+                                                {{ $role->is_active ? 'checked' : '' }}
+                                                {{ $role->users->count() > 0 ? '' : '' }}
+                                                onchange="this.form.submit()">
                                         <label class="form-check-label" for="statusToggle{{ $role->id }}">
                                             {{ $role->is_active ? 'Active' : 'Inactive' }}
                                         </label>

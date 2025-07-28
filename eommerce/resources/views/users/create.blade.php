@@ -4,7 +4,7 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card bg-white border-0 shadow-sm">
+            <div class="card bg-white border-0 shadow-sm mt-4">
                 <div class="card-header bg-white border-0 py-3">
                     <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i>Create New User</h4>
                 </div>

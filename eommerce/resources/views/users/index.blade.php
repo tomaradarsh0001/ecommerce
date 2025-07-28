@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+        .form-select{
+        font-size: 1.3rem !important;
+    }
+</style>
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -66,41 +71,62 @@
                          data-user-status="{{ $user->is_active ? 'active' : 'inactive' }}">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="me-3">
-                                <div class="d-flex align-items-center">
-                                    <h5 class="mb-2 text-dark">{{ $user->name }}</h5>
-                                    <span class="badge ms-2 bg-{{ $user->is_active ? 'success' : 'danger' }}">
-                                        {{ $user->is_active ? 'Active' : 'Inactive' }}
-                                    </span>
-                                </div>
-                                <div class="text-muted small mb-2">{{ $user->email }}</div>
-                                @if($user->roles->count())
-                                <div class="d-flex flex-wrap gap-2 mt-2">
+                            <div class="d-flex align-items-center mb-1">
+                                <h5 class="mb-0 text-dark">
+                                    <i class="fas fa-user me-2 text-secondary"></i> {{-- User icon --}}
+                                    {{ $user->name }}
+                                </h5>
+                                <span class="badge ms-2 bg-{{ strtolower($user->status) === 'active' ? 'success' : 'danger' }}">
+                                    <i class="fas {{ strtolower($user->status) === 'active' ? 'fa-check-circle' : 'fa-times-circle' }} me-1"></i>
+                                    {{ ucfirst($user->status) }}
+                                </span>
+                            </div>
+
+                            <div class="text-muted small mb-2">
+                                <i class="fas fa-envelope me-1"></i> {{-- Email icon --}}
+                                {{ $user->email }}
+                            </div>
+
+                            @if($user->roles->count())
+                                <div class="flex-wrap gap-2 mt-2">
                                     @foreach($user->roles as $role)
-                                    <span class="badge bg-primary text-white">
-                                        {{ $role->name }}
-                                    </span>
+                                        <span class="badge bg-primary text-white">
+                                            <i class="fas fa-user-shield me-1"></i> {{-- Role icon --}}
+                                            {{ $role->name }}
+                                        </span>
                                     @endforeach
                                 </div>
-                                @else
-                                <span class="text-muted small">No roles assigned</span>
-                                @endif
-                            </div>
+                            @else
+                                <span class="text-muted small">
+                                    <i class="fas fa-exclamation-circle me-1"></i> {{-- Warning icon --}}
+                                    No roles assigned
+                                </span>
+                            @endif
+                        </div>
+
                             
                             <div class="d-flex align-items-center">
                                 <!-- Status Toggle Switch -->
-                                <form method="POST" action="{{ route('users.toggle-status', $user->id) }}" class="me-2">
-                                    @csrf
-                                    @method('PATCH')
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" 
-                                               id="statusToggle{{ $user->id }}" 
-                                               {{ $user->is_active ? 'checked' : '' }}
-                                               onchange="this.form.submit()">
-                                        <label class="form-check-label" for="statusToggle{{ $user->id }}">
-                                            {{ $user->is_active ? 'Active' : 'Inactive' }}
-                                        </label>
-                                    </div>
-                                </form>
+                           <form method="POST" action="{{ route('users.toggle-status', $user->id) }}" class="me-2">
+                            @csrf
+                            @method('PATCH')
+
+                            <div class="form-check form-switch">
+                                <!-- Hidden field ensures 'inactive' is sent if unchecked -->
+                                <input type="hidden" name="status" value="inactive">
+
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="statusToggle{{ $user->id }}"
+                                    name="status" value="active"
+                                    {{ $user->status === 'active' ? 'checked' : '' }}
+                                    onchange="this.form.submit()">
+
+                                <label class="form-check-label" for="statusToggle{{ $user->id }}">
+                                    {{ ucfirst($user->status) }}
+                                </label>
+                            </div>
+                        </form>
+
 
                                 <div class="btn-group" role="group">
                                     <a href="{{ route('users.edit-roles', $user->id) }}" class="btn btn-sm btn-outline-primary">
