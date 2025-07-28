@@ -9,9 +9,10 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [CategoryController::class, 'welcomeCategories'])->name('welcome');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', function () {

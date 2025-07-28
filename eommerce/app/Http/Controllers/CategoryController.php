@@ -10,8 +10,14 @@ class CategoryController extends Controller
   
  public function index()
 {
-    $categories = Category::paginate(10); // instead of ->all()
+    $categories = Category::paginate(12); 
     return view('categories.index', compact('categories'));
+}
+
+public function welcomeCategories()
+{
+    $categories = Category::where('status', true)->take(12)->get(); // For welcome page carousel
+     return view('welcome', compact('categories'));
 }
 
 public function create()
