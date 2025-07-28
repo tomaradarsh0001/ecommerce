@@ -5,6 +5,7 @@ use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,6 +41,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     ->name('roles.edit-permissions');
     Route::put('roles/{role}/permissions', [RoleController::class, 'updatePermissions'])
         ->name('roles.update-permissions');
+    Route::resource('categories', CategoryController::class);
+    Route::patch('/categories/toggle-status/{category}', [CategoryController::class, 'toggleStatus'])
+    ->name('categories.toggle-status');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard' , function () {
